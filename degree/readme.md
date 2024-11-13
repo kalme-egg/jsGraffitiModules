@@ -153,7 +153,7 @@ gradeクラスの場合はグレードで返ります。
 与えられた引数の角度のアークタンジェントを返します。  
 結果は参照元クラスの角度モードで返されます。  
 また、角度は動径が第一象限と第四象限にあたるものが返されます。
-#### acoefficient(*number*) {radian}
+#### radian.acoefficient(*number*) {radian}
 `radian.acoefficient(number)` -> *Object class radian*  
 `radian.acoefficient(0.5)`のように使用します。  
 引数×πの角度を持ったradianクラスのオブジェクトを返します。
