@@ -1,6 +1,6 @@
 /**
  *  Made by kalme-egg
- *  version: 0.9.0
+ *  version: 0.9.1
  * 
  *  CC-BY 4.0
  *  https://creativecommons.org/licenses/by/4.0/
