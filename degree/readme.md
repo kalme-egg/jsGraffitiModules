@@ -1,5 +1,6 @@
 # 角度クラスmodule
 ## 更新履歴
+2024/11/14 0.9.0 プロパティ:anglemode 追加
 2024/11/13 0.8.0 作成&公開
 ## ライセンス
 CC-BY 4.0にて配布しています。  
@@ -35,21 +36,23 @@ grade(グレード)は一周を0~400で表します。
 ### プロパティ
 `foo.property`の形式で参照します。
 #### value (All)
-`foo.value` -> 
-*number* (any)  
+`foo.value` -> *number* (any)  
 モード指定せず、単純に角度の値を返します。  
 degreeクラスの場合はdegree(度)で、  
 radianクラスの場合はラジアンで、  
 gradeクラスの場合はグレードで返ります。
+#### anglemode (All)
+`foo.anglemode` -> "degree"|"radian"|"grade"
+自らの角度モードを返します。
 #### degree (All)
 `foo.degree` -> *number* (degree)  
-元のクラスの角度モードに関わらず、degree(度)で返します。
+自らの角度モードに関わらず、degree(度)で返します。
 #### radian (All)
 `foo.radian` -> *number* (radian)  
-元のクラスの角度モードに関わらず、ラジアンで返します。
+自らの角度モードに関わらず、ラジアンで返します。
 #### grade (All)
 `foo.grade` -> *number* (grade)  
-元のクラスの角度モードに関わらず、グレードで返します。
+自らの角度モードに関わらず、グレードで返します。
 #### degreefixed (degree)
 `foo.degreefixed` -> *number* (degree/fixed)  
 自らの角度(degree)を修正範囲に合わせて返します。

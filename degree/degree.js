@@ -1,6 +1,6 @@
 /**
  *  Made by kalme-egg
- *  version: 0.8.0
+ *  version: 0.9.0
  * 
  *  CC-BY 4.0
  *  https://creativecommons.org/licenses/by/4.0/
@@ -12,6 +12,8 @@
 export {degree,radian,grade}
 
 class degree {
+	anglemode = "degree" 
+
 	constructor(number) {
 		this.value = degree.#fix360(number)
 	}
@@ -115,6 +117,7 @@ class degree {
 }
 
 class radian {
+	anglemode = "radian"
 
 	constructor(number) {
 		this.value = radian.#fixabs(number)
@@ -227,6 +230,8 @@ class radian {
 }
 
 class grade {
+	anglemode = "grade"
+
 	constructor(number) {
 		this.value = grade.#fix400(number)
 	}
