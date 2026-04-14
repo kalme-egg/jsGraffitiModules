@@ -1,6 +1,6 @@
 /**
  *  Made by kalme-egg
- *  version: 0.9.1
+ *  version: 0.9.2
  * 
  *  CC-BY 4.0
  *  https://creativecommons.org/licenses/by/4.0/
@@ -124,7 +124,7 @@ class radian {
 	}
 
 	static #fixabs(number) {
-		if (number > 0) {
+		if (number >= 0) {
 			return number % (2*Math.PI)
 		} else {
 			return (2*Math.PI - (-1 * number) % 2*Math.PI) % 2*Math.PI

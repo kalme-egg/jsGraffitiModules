@@ -1,6 +1,7 @@
 # arrayExtends
 ## 更新履歴
-2025/5/17 0.1.0 作成&公開 (beta)
+2026/04/14 0.2.0 Array2dを追加 (beta nodocs)
+2025/05/17 0.1.0 作成&公開 (beta)
 ## ライセンス
 CC-BY 4.0にて配布しています。  
 https://creativecommons.org/licenses/by/4.0/  

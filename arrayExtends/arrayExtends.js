@@ -1,6 +1,6 @@
 /**
  *  Made by kalme-egg
- *  version: 0.1.0
+ *  version: 0.2.0
  * 
  *  CC-BY 4.0
  *  https://creativecommons.org/licenses/by/4.0/
@@ -9,7 +9,7 @@
  * 
  */
 
-export {Arrayshift}
+export {Arrayshift, Array2d}
 
 class Arrayshift extends Array {
 
@@ -67,5 +67,78 @@ class Arrayshift extends Array {
 		return returning
 	}
 
+
+}
+
+
+class Array2d {
+	constructor(){
+		switch (arguments.length) {
+			case 0:
+				this.length = 1
+				this.depth = 1
+				break
+			case 1:
+				if (typeof arguments[0] == "number") {
+					return new Array2d(arguments[0],arguments[0])
+				}
+			case 2:
+				if (typeof arguments[0] == "number" && typeof arguments[1] == "number") {
+					for (let i = 0; i < arguments[0]; i++) {
+						for (let j = 0; j < arguments[1]; j++) {
+							this[`${i},${j}`] = undefined
+						}
+					}
+					this.length = arguments[0]
+					this.depth = arguments[1]
+					break
+				}
+			default:
+				for (let i = 0; i < arguments.length; i++) {
+					this[`${i},0`] = arguments[i]
+				}
+		}
+		
+	}
+
+	#_length
+	#_depth
+
+	get length(){
+		return this.#_length
+	}
+
+	set length(value){
+		if (this.#_length < value) {
+			for (let i = this.#_length; i < value; i++) {
+				for (let j = 0; j < this.#_depth; j++){
+					this[`${i},${j}`] = undefined
+				}
+			}
+		} else if (this.#_length > value) {
+			for (let i = this.#_length -1; i > value; i--) {
+				for (let j = 0; j < this.#_depth; j++){
+					delete this[`${i},${j}`]
+				}
+			}
+		}
+		this.#_length = value
+	}
+
+	
+	get depth(){
+		return this.#_depth
+	}
+
+	set depth(value){
+		if (this.#_depth < value) {
+			for (let i = 0; i < this.#_length; i++) {
+				for (let j = this.#_depth; j < value; j++){
+					this[`${i},${j}`] = undefined
+				}
+			}
+		}
+		this.#_depth = value
+	}
 
 }
