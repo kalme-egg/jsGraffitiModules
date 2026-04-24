@@ -19,17 +19,42 @@ function typeDetail(x) {
         type = "null";
         if (x === null) detail = "null";
         else detail = "undefined"
+        return {type:type, detail:detail}
     }
-    var type = typeof x, c = x.constructor;
-    if (type === 'number') {
-        if (isNaN(x)) return 'NaN';
-        if (!isFinite(x))
-            return x === Infinity ? 'Infinity' : '-Infinity';
+    let type_j = typeof x, c = x.constructor;
+    if (type_j === 'number') {
+        type = "number"
+        if (isNaN(x)) detail = "NaN";
+        else if (!isFinite(x))
+            detail = ( x === Infinity ? "Infinity" : "-Infinity")
+        else detail = "pure_number"
     }
-    if (type === 'object') {
-        return c && c.name ? c.name :
+    if (type_j === "bigint") {
+        type = "bigint"
+        detail = "bigint"
+    }
+    if (type_j === "boolean") {
+        type = "boolean"
+        detail = "boolean"
+    }
+    if (type_j === "string") {
+        type = "string"
+        detail = "string"
+    }
+    if (type_j === "function") {
+        type = "function"
+        detail =  c && c.name ? c.name :
             Object.prototype.toString.call(x).slice(8, -1);
     }
-    return type;
+    if (type_j === "symbol") {
+        type = "symbol"
+        detail = "symbol"
+    }
+    if (type_j === 'object') {
+        type = "object"
+        detail =  c && c.name ? c.name :
+            Object.prototype.toString.call(x).slice(8, -1);
+    }
+        return {type:type, detail:detail}
 }
 
