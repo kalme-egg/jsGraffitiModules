@@ -1,6 +1,6 @@
 /**
  *  Made by kalme-egg
- *  version: 1.0.0
+ *  version: 1.0.1
  * 
  *  CC-BY 4.0
  *  https://creativecommons.org/licenses/by/4.0/
@@ -51,7 +51,7 @@ function overLoader(overLoadDefinitions) {
     		}
     	}
 		if(Object.keys(matchArgs).length > 0){
-			return overLoadDefinitions[Object.keys(matchArgs).toSorted((a,b)=>b-a)[0]].func(...args)
+			return overLoadDefinitions[matchArgs[Object.keys(matchArgs).toSorted((a,b)=>b-a)[0]]].func(...args)
 		}
 
 		matchArgs = {}
@@ -59,11 +59,11 @@ function overLoader(overLoadDefinitions) {
 			const funcSet = overLoadDefinitions[i]
     		const definitionArgTypes = funcSet.args.split(',').map(type => type.trim());
 			if(definitionArgTypes.toString().startsWith(argTypesStrict.toString())) {
-				matchArgs[argTypesStrict.toString().length] = i
+				matchArgs[definitionArgTypes.toString().length] = i
     		}
     	}
 		if(Object.keys(matchArgs).length > 0){
-			return overLoadDefinitions[Object.keys(matchArgs).toSorted((a,b)=>b-a)[0]].func(...args)
+			return overLoadDefinitions[matchArgs[Object.keys(matchArgs).toSorted((a,b)=>a-b)[0]]].func(...args)
 		}
 
 		matchArgs = {}
@@ -75,7 +75,7 @@ function overLoader(overLoadDefinitions) {
     		}
     	}
 		if(Object.keys(matchArgs).length > 0){
-			return overLoadDefinitions[Object.keys(matchArgs).toSorted((a,b)=>b-a)[0]].func(...args)
+			return overLoadDefinitions[matchArgs[Object.keys(matchArgs).toSorted((a,b)=>b-a)[0]]].func(...args)
 		}
 
 		matchArgs = {}
@@ -83,11 +83,11 @@ function overLoader(overLoadDefinitions) {
 			const funcSet = overLoadDefinitions[i]
     		const definitionArgTypes = funcSet.args.split(',').map(type => type.trim());
 			if(definitionArgTypes.toString().startsWith(argTypesAbout.toString())) {
-				matchArgs[argTypesAbout.toString().length] = i
+				matchArgs[definitionArgTypes.toString().length] = i
     		}
     	}
 		if(Object.keys(matchArgs).length > 0){
-			return overLoadDefinitions[Object.keys(matchArgs).toSorted((a,b)=>b-a)[0]].func(...args)
+			return overLoadDefinitions[matchArgs[Object.keys(matchArgs).toSorted((a,b)=>a-b)[0]]].func(...args)
 		}
 
 		throw TypeError("argument aren't match.")
