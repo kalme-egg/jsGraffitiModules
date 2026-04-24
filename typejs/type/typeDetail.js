@@ -1,6 +1,6 @@
 /**
  *  Made by kalme-egg
- *  version: 0.1.0
+ *  version: 0.2.0
  * 
  *  CC-BY 4.0
  *  https://creativecommons.org/licenses/by/4.0/
@@ -19,7 +19,7 @@ function typeDetail(x) {
         type = "null";
         if (x === null) detail = "null";
         else detail = "undefined"
-        return {type:type, detail:detail}
+        return new typeDetailData(type,detail)
     }
     let type_j = typeof x, c = x.constructor;
     if (type_j === 'number') {
@@ -54,7 +54,30 @@ function typeDetail(x) {
         type = "object"
         detail =  c && c.name ? c.name :
             Object.prototype.toString.call(x).slice(8, -1);
+        if(detail === "Array"){
+            type = "Array"
+            if (x.length == 0) detail = "none"
+            else {subTypes = x.map(element => {
+                return typeDetail(element)
+            })
+            if(new Set(subTypes.map(element=>element.detail)).size == 1) detail = subTypes[0]
+            else detail = "any"
+            }
+        }
     }
-        return {type:type, detail:detail}
+        return new typeDetailData(type,detail)
 }
 
+class typeDetailData {
+    constructor(type,detail){
+        this.type = type
+        this.detail = detail
+    }
+    valueOf(){
+        if (this.type !== "Array") {
+            return this.detail
+        } else {
+            return `Array[${this.detail.valueOf()}]`
+        }
+    }
+}
