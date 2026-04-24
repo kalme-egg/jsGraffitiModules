@@ -10,3 +10,12 @@
  * Ref:https://qiita.com/ciffelia/items/b3d17153023fa0f2e469
  * 
  */
+
+/**
+ * const function = overLoader()
+ * 
+ */
+
+function overLoader(overLoadDefinitions) {
+	
+}
