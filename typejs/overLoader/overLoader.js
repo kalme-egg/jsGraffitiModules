@@ -18,6 +18,12 @@
 
 // import {typeDetail} from "../type/typeDetail"
 
+/**
+ * @typedef {{args:string,func:Function}[]} overLoadDefinitions
+ * 
+ * @param {overLoadDefinitions} overLoadDefinitions 
+ * @returns {Function} 
+ */
 function overLoader(overLoadDefinitions) {
 	const thisArgsT = typeDetail(overLoadDefinitions)
 	if (thisArgsT.type !== "Array" && thisArgsT.detail?.type !== "object") {
