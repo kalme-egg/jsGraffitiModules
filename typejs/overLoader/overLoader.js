@@ -16,7 +16,7 @@
  * 
  */
 
-import {typeDetail} from "../type/typeDetail"
+// import {typeDetail} from "../type/typeDetail"
 
 function overLoader(overLoadDefinitions) {
 	const thisArgsT = typeDetail(overLoadDefinitions)

@@ -12,7 +12,7 @@
  */
 
 
-export function typeDetail(x) {
+function typeDetail(x) {
     let type = "unknown";
     let detail = "unknown";
     if (x == null) {
