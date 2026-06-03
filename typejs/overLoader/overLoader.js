@@ -32,11 +32,19 @@ function overLoader(overLoadDefinitions) {
 
 	return (...args) => {
 		const argTypesStrict = args.map(a=>{return typeDetail(a).valueOf()})
+		const argTypesPromote = args.map(a=>{return typePromotion(typeDetail(a)).valueOf()})
 		const argTypesAbout = args.map(a=>{return typeDetail(a).type})
 
 		for(const funcSet of overLoadDefinitions) {
     		const definitionArgTypes = funcSet.args.split(',').map(type => type.trim());
 			if(argTypesStrict.toString() == definitionArgTypes.toString()) {
+    			return funcSet.func(...args);
+    		}
+    	}
+
+		for(const funcSet of overLoadDefinitions) {
+    		const definitionArgTypes = funcSet.args.split(',').map(type => type.trim());
+			if(argTypesPromote.toString() == definitionArgTypes.toString()) {
     			return funcSet.func(...args);
     		}
     	}
@@ -76,6 +84,30 @@ function overLoader(overLoadDefinitions) {
 		for(let i=0; i<overLoadDefinitions.length; i++) {
 			const funcSet = overLoadDefinitions[i]
     		const definitionArgTypes = funcSet.args.split(',').map(type => type.trim());
+			if(argTypesPromote.toString().startsWith(definitionArgTypes.toString())) {
+				matchArgs[definitionArgTypes.toString().length] = i
+    		}
+    	}
+		if(Object.keys(matchArgs).length > 0){
+			return overLoadDefinitions[matchArgs[Object.keys(matchArgs).toSorted((a,b)=>b-a)[0]]].func(...args)
+		}
+
+		matchArgs = {}
+		for(let i=0; i<overLoadDefinitions.length; i++) {
+			const funcSet = overLoadDefinitions[i]
+    		const definitionArgTypes = funcSet.args.split(',').map(type => type.trim());
+			if(definitionArgTypes.toString().startsWith(argTypesPromote.toString())) {
+				matchArgs[definitionArgTypes.toString().length] = i
+    		}
+    	}
+		if(Object.keys(matchArgs).length > 0){
+			return overLoadDefinitions[matchArgs[Object.keys(matchArgs).toSorted((a,b)=>a-b)[0]]].func(...args)
+		}
+
+		matchArgs = {}
+		for(let i=0; i<overLoadDefinitions.length; i++) {
+			const funcSet = overLoadDefinitions[i]
+    		const definitionArgTypes = funcSet.args.split(',').map(type => type.trim());
 			if(argTypesAbout.toString().startsWith(definitionArgTypes.toString())) {
 				matchArgs[definitionArgTypes.toString().length] = i
     		}
@@ -94,6 +126,10 @@ function overLoader(overLoadDefinitions) {
     	}
 		if(Object.keys(matchArgs).length > 0){
 			return overLoadDefinitions[matchArgs[Object.keys(matchArgs).toSorted((a,b)=>a-b)[0]]].func(...args)
+		}
+
+		if(args.length == 0){
+			return overLoadDefinitions.find(value=>value.args=="void").func(...args)
 		}
 
 		throw TypeError("argument aren't match.")
