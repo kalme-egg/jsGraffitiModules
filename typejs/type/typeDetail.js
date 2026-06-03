@@ -56,11 +56,13 @@ function typeDetail(x) {
             Object.prototype.toString.call(x).slice(8, -1);
         if(detail === "Array"){
             type = "Array"
+            let subTypes
             if (x.length == 0) detail = "none"
             else {subTypes = x.map(element => {
                 return typeDetail(element)
             })
-            if(new Set(subTypes.map(element=>element.detail)).size == 1) detail = subTypes[0]
+            if(new Set(subTypes.map(element=>element.detail.toString())).size == 1) detail = subTypes[0]
+            else if (new Set(subTypes.map(element=>typePromotion(element).detail.toString())).size == 1) detail = typePromotion(subTypes[0])
             else detail = "any"
             }
         }
@@ -80,4 +82,23 @@ class typeDetailData {
             return `Array[${this.detail.valueOf()}]`
         }
     }
+}
+
+function typePromotion(typeDetailData) {
+    if(typeDetailData.valueOf().includes("Array"))typePromotion(typeDetailData.detail)
+    const newData = typeDetailData
+    switch(typeDetailData.detail)
+    {
+        case "null":
+        case "undefined":
+            newData.detail = "null"
+            break;
+        case "pure_number":
+        case "Infinity":
+        case "-Infinity":
+        case "NaN":
+            newData.detail = "number"
+            break;
+    }
+    return newData
 }
